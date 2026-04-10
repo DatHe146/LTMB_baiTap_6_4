@@ -1,22 +1,29 @@
 import { Stack } from 'expo-router';
-import { AuthProvider } from '../components/AuthContext';
+import { AuthProvider } from '../components/AuthContext'; // Đảm bảo file này tồn tại
 
 export default function RootLayout() {
   return (
     <AuthProvider>
       <Stack screenOptions={{ headerShown: false }}>
-        {/* Màn hình Đăng nhập */}
-        <Stack.Screen name="index" />
-        
-        {/* Nhóm các màn hình chính (Shop, Cart, v.v.) */}
+        {/* Nhóm màn hình chính có Bottom Tabs */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
-        {/* Cấu hình màn hình Filter dưới dạng Modal */}
+        
+        {/* Màn hình Checkout (Modal trượt lên) */}
         <Stack.Screen 
-          name="filter" 
+          name="checkout" 
           options={{ 
-            presentation: 'modal', // Hiệu ứng trượt từ dưới lên
-            animation: 'slide_from_bottom', // Đảm bảo hiệu ứng mượt mà trên Android
+            presentation: 'modal',
+            animation: 'slide_from_bottom',
+            headerShown: false 
+          }} 
+        />
+
+        {/* Màn hình thông báo Thành công/Thất bại (Modal trượt lên) */}
+        <Stack.Screen 
+          name="orderStatus" 
+          options={{ 
+            presentation: 'transparentModal', // Nền trong suốt
+            animation: 'fade', // Hiệu ứng mờ dần
             headerShown: false 
           }} 
         />
